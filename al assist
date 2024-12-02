@@ -1,0 +1,36 @@
+import speech_recognition as sr
+import pyttsx3
+import datetime
+import wikipedia
+import webbrowser
+import os
+import time
+import subprocess
+from ecapture import ecapture as ec
+import wolframalpha
+import json
+import requests
+import openai
+import random
+import cv2
+import mediapipe as mp
+import threading
+import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
+
+# Set OpenAI API key
+openai.api_key = 'YOUR_OPENAI_API_KEY'
+
+# Initialize the speech engine
+engine = pyttsx3.init('sapi5')
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[0].id)
+
+mp_face_detection = mp.solutions.face_detection
+mp_drawing = mp.solutions.drawing_utils
+
+# Event for stopping face detection
+stop_event = threading.Event()
+
+# Initialize face recognition
+face_recognition_model = mp.solutions.face_detection.FaceDetection(model_selection=1, min_detection_confidence=0.5)
